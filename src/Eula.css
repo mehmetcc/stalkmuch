@@ -1,0 +1,11 @@
+.EulaComponentClass{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.AcceptCheckboxClass {
+    text-align: center;  
+}
+
+body{background-color: #7e99cf;}

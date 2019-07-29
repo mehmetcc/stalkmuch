@@ -1,26 +1,36 @@
+/** All react related imports */
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/** All material-ui related imports */
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/** internal classes and/or functions defined */
+import './App.css';
+import Eula from './Eula';
+import GlobeEntrypoint from './GlobeEntrypoint';
+
+/** Routing related */
+/** Arkadaşlar ne yaptığınızı bilmiyorsanız silmeyin */
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+
+class App extends React.Component {
+
+  state = {
+    focus: undefined,
+  }
+
+  render() {
+    return (
+      /** Arkadaşlar bakın routing ile oynamayın */
+      <Router>
+      <Switch>
+            <Route exact path='/' component={Eula} />
+            <Route path='/globe' component={GlobeEntrypoint} />
+          </Switch>
+      </Router>
+      /** Routing burada bitiyo */
+    );
+  }
+
 }
 
 export default App;

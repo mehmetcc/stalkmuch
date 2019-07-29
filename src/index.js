@@ -1,10 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'typeface-roboto';
+
+/**
+ * GENEL OLARAK ÇOK ELLEŞMEYİN BURALARA
+ */
+
+// TODO these things should be deleted
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+/** Arkadaşlar ne yaptığınızı bilmiyorsanız silmeyin */
+import { BrowserRouter } from 'react-router-dom';
+
+ReactDOM.render((
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  ), document.getElementById('root'));
+  
+
+
+/**
+ * Totally unnecessary for localhost testing
+ */
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
