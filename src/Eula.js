@@ -36,7 +36,7 @@ class Eula extends React.Component {
     return (
       <div className="EulaComponentClass">
         <Snackbar
-        open={!!this.state.checkBoxClicked}
+        open={!!this.state.checkBoxClicked&&false}
         message="You didn't agree to the terms and conditions"
         />
         <br /><br /><br /><br /><br /><br /><br /><br />
