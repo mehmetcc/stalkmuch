@@ -9,6 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+/** internal classes and/or functions defined */
+import RedditTextField from './RedditTextField';
+
 /** Material-UI stylings */
 const useStyles = makeStyles (theme => ({
   root: {
@@ -28,12 +31,13 @@ const useStyles = makeStyles (theme => ({
 }));
 
 /** internal classes and/or functions defined */
-export default function EulaComponent () {
+export default function SearchComponent () {
   const classes = useStyles ();
 
   const [values, setValues] = React.useState ({
     longitude: undefined,
     latitude: undefined,
+    requestedLocationCheckByHand: false,
   });
 
   const handleChange = name => event => {
@@ -52,36 +56,34 @@ export default function EulaComponent () {
         alignItems="center"
         justify="center"
       >
-        <TextField
+        <RedditTextField
           id="longitudeInputField"
           label="Longitude"
-          className={classes.textField}
-          value={values.name}
+          className={classes.margin}
+          defaultValue="39.9334"
+          variant="filled"
           onChange={handleChange ('longitude')}
-          margin="normal"
-          variant="outlined"
-          InputProps={{
-            className: classes.input,
-          }}
         />
-        <TextField
-          required
+        <br />
+        <RedditTextField
           id="latitudeInputField"
           label="Latitude"
-          className={classes.textField}
-          value={values.name}
+          defaultValue="32.8597"
+          className={classes.margin}
           onChange={handleChange ('latitude')}
-          margin="normal"
-          variant="outlined"
-          InputProps={{
-            className: classes.input,
-          }}
+          variant="filled"
+          className={classes.margin}
         />
+        <br/>
         <Button
           required
           variant="contained"
           color="primary"
           className={classes.button}
+          onClick={() => {
+            setValues ({...values, ['requestedLocationCheckByHand']: true});
+            console.log("Debug - Button Clicked: " + values.requestedLocationCheckByHand);
+          }}
         >
           Submit
         </Button>
