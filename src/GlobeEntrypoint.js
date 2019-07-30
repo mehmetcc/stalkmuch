@@ -19,12 +19,18 @@ class GlobeEntrypoint extends React.Component {
 
   getLocationInformation () {}
 
+  /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
+  callBackFromSearchComponent = searchData => {
+    this.setState ({focus: searchData});
+  };
+  /** 4. bitti */
+
   render () {
     return (
       <div className="GlobeEntrypoint">
         {/** 3. */}
         <div id="SearchHeader">
-          <SearchComponent />
+          <SearchComponent parentCallback = {this.callBackFromSearchComponent} />
         </div>
         {/** 3. bitti */}
         {/** 1. */}
@@ -51,10 +57,8 @@ class GlobeEntrypoint extends React.Component {
             variant="extended"
             aria-label="Delete"
             className={styles.fab}
-            onClick={() => {
-              // TODO geolocation logic
-              this.setState ({focus: [39.9334, 32.8597]});
-              console.log (this.state.focus);
+            onClick={ () => {
+              this.getLocationInformation();
             }}
           >
             <NavigationIcon className={styles.extendedIcon} />

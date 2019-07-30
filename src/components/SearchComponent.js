@@ -31,13 +31,13 @@ const useStyles = makeStyles (theme => ({
 }));
 
 /** internal classes and/or functions defined */
-export default function SearchComponent () {
+export default function SearchComponent (props) {
   const classes = useStyles ();
 
   const [values, setValues] = React.useState ({
-    longitude: undefined,
-    latitude: undefined,
-    requestedLocationCheckByHand: false,
+    longitude: 39.9334,
+    latitude: 32.8597,
+    focus: undefined,
   });
 
   const handleChange = name => event => {
@@ -45,6 +45,10 @@ export default function SearchComponent () {
 
     console.log ('Debug - Longitude: ' + values.longitude);
     console.log ('Debug - Latitude: ' + values.latitude);
+  };
+
+  const sendData = () => {
+    props.parentCallback(values.focus);
   };
 
   return (
@@ -72,17 +76,22 @@ export default function SearchComponent () {
           className={classes.margin}
           onChange={handleChange ('latitude')}
           variant="filled"
-          className={classes.margin}
         />
-        <br/>
+        <br />
         <Button
           required
           variant="contained"
           color="primary"
           className={classes.button}
           onClick={() => {
-            setValues ({...values, ['requestedLocationCheckByHand']: true});
-            console.log("Debug - Button Clicked: " + values.requestedLocationCheckByHand);
+            values.focus = [values.longitude, values.latitude];
+
+            console.log (
+              'Debug - Focus after button is clicked: ' + values.focus
+            );
+
+            sendData();
+
           }}
         >
           Submit
