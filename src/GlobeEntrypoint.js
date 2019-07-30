@@ -17,7 +17,9 @@ class GlobeEntrypoint extends React.Component {
     isBrowserSupportingGeolocation: undefined,
   };
 
-  getLocationInformation () {}
+  /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
+
+    /** 5 bitti */
 
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
   callBackFromSearchComponent = searchData => {
@@ -57,9 +59,7 @@ class GlobeEntrypoint extends React.Component {
             variant="extended"
             aria-label="Delete"
             className={styles.fab}
-            onClick={ () => {
-              this.getLocationInformation();
-            }}
+            onClick={() => {}}
           >
             <NavigationIcon className={styles.extendedIcon} />
             Find My Location!
