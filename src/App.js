@@ -10,6 +10,7 @@ import GlobeEntrypoint from './GlobeEntrypoint';
 /** Routing related */
 /** Arkadaşlar ne yaptığınızı bilmiyorsanız silmeyin */
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import DummyComponent from './components/DummyComponent';
 
 
 class App extends React.Component {
@@ -25,6 +26,7 @@ class App extends React.Component {
       <Switch>
             <Route exact path='/' component={Eula} />
             <Route path='/globe' component={GlobeEntrypoint} />
+            <Route path='/debug' component={DummyComponent} />
           </Switch>
       </Router>
       /** Routing burada bitiyo */
