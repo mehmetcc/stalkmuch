@@ -22,12 +22,18 @@ class GlobeEntrypoint extends React.Component {
   render () {
     return (
       <div className="GlobeEntrypoint">
+        {/** 3. */}
         <div id="SearchHeader">
-        <SearchComponent />
+          <SearchComponent />
         </div>
+        {/** 3. bitti */}
+        {/** 1. */}
         <div style={{width: '100vw', height: '100vh'}}>
           <ReactGlobe focus={this.state.focus} />
         </div>
+        {/** 1. bitti */}
+
+        {/** 2. */}
         <div
           style={{
             position: 'absolute',
@@ -69,6 +75,7 @@ class GlobeEntrypoint extends React.Component {
             Reset!
           </Fab>
         </div>
+        {/* 2. bitti */}
       </div>
     );
   }
