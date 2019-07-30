@@ -12,14 +12,34 @@ import './GlobeEntrypoint.css';
 import SearchComponent from './components/SearchComponent';
 
 class GlobeEntrypoint extends React.Component {
+
   state = {
     focus: undefined,
     isBrowserSupportingGeolocation: undefined,
   };
 
   /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
+  getGeolocation () {
+    const location = window.navigator && window.navigator.geolocation;
 
-    /** 5 bitti */
+    if (location) {
+      location.getCurrentPosition (
+        position => {
+          this.setState ({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        error => {
+          this.setState ({
+            latitude: 'err-latitude',
+            longitude: 'err-longitude',
+          });
+        }
+      );
+    }
+  }
+  /** 5 bitti */
 
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
   callBackFromSearchComponent = searchData => {
@@ -32,7 +52,7 @@ class GlobeEntrypoint extends React.Component {
       <div className="GlobeEntrypoint">
         {/** 3. */}
         <div id="SearchHeader">
-          <SearchComponent parentCallback = {this.callBackFromSearchComponent} />
+          <SearchComponent parentCallback={this.callBackFromSearchComponent} />
         </div>
         {/** 3. bitti */}
         {/** 1. */}
@@ -59,7 +79,19 @@ class GlobeEntrypoint extends React.Component {
             variant="extended"
             aria-label="Delete"
             className={styles.fab}
-            onClick={() => {}}
+            onClick={() => {
+              const location = window.navigator && window.navigator.geolocation;
+            
+              if (location) {
+                location.getCurrentPosition((position) => {
+                  this.setState({
+                    focus: [position.coords.latitude,
+                    position.coords.longitude],
+                  });
+                });
+              }
+            }
+          }
           >
             <NavigationIcon className={styles.extendedIcon} />
             Find My Location!

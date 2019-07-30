@@ -8,9 +8,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-globe": "^3.1.1",
+    "react-hook-geolocation": "^1.0.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
-    "react-use-geolocation": "0.0.0-alpha.1",
     "three": "^0.106.2",
     "typeface-roboto": "0.0.75"
   },
