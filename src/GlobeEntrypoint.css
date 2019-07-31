@@ -8,3 +8,12 @@
   border-radius: 25px;
 
 } 
+
+#InformationPanelHeader {
+  position: absolute;
+  left: 1020px; 
+  top: 70px; 
+  width: 400px;
+  font-size: 24px;
+  border-radius: 25px;
+}

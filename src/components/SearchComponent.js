@@ -48,7 +48,7 @@ export default function SearchComponent (props) {
   };
 
   const sendData = () => {
-    props.parentCallback(values.focus);
+    props.parentCallback (values.focus);
   };
 
   return (
@@ -90,8 +90,7 @@ export default function SearchComponent (props) {
               'Debug - Focus after button is clicked: ' + values.focus
             );
 
-            sendData();
-
+            sendData ();
           }}
         >
           Submit

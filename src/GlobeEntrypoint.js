@@ -10,46 +10,32 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 /** internal classes and/or functions defined */
 import './GlobeEntrypoint.css';
 import SearchComponent from './components/SearchComponent';
+import InformationPanelComponent from './components/InformationPanelComponent';
 
 class GlobeEntrypoint extends React.Component {
-
   state = {
     focus: undefined,
     isBrowserSupportingGeolocation: undefined,
   };
 
-  /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
-  getGeolocation () {
-    const location = window.navigator && window.navigator.geolocation;
-
-    if (location) {
-      location.getCurrentPosition (
-        position => {
-          this.setState ({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-        },
-        error => {
-          this.setState ({
-            latitude: 'err-latitude',
-            longitude: 'err-longitude',
-          });
-        }
-      );
-    }
-  }
-  /** 5 bitti */
-
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
   callBackFromSearchComponent = searchData => {
     this.setState ({focus: searchData});
+    this.makeApiCall ();
   };
   /** 4. bitti */
+
+  makeApiCall () {
+  }
 
   render () {
     return (
       <div className="GlobeEntrypoint">
+        {/**6. information panel */}
+        <div id="InformationPanelHeader">
+          <InformationPanelComponent />
+        </div>
+        {/** 6. bitti */}
         {/** 3. */}
         <div id="SearchHeader">
           <SearchComponent parentCallback={this.callBackFromSearchComponent} />
@@ -80,18 +66,24 @@ class GlobeEntrypoint extends React.Component {
             aria-label="Delete"
             className={styles.fab}
             onClick={() => {
+              /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
               const location = window.navigator && window.navigator.geolocation;
-            
+
               if (location) {
-                location.getCurrentPosition((position) => {
-                  this.setState({
-                    focus: [position.coords.latitude,
-                    position.coords.longitude],
+                location.getCurrentPosition (position => {
+                  this.setState ({
+                    focus: [
+                      position.coords.latitude,
+                      position.coords.longitude,
+                    ],
                   });
                 });
               }
+
+              this.makeApiCall ();
             }
-          }
+            /** 5 bitti */
+            }
           >
             <NavigationIcon className={styles.extendedIcon} />
             Find My Location!
