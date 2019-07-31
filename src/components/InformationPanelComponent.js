@@ -18,8 +18,9 @@ const useStyles = makeStyles (theme => ({
 
 /** internal classes and/or functions defined */
 
-export default function InformationPanelComponent () {
+export default function InformationPanelComponent (props) {
   const classes = useStyles ();
+  const { longitude, latitude } = props;
 
   const [values, setValues] = React.useState ({
     nearestCenter: '',
@@ -32,34 +33,25 @@ export default function InformationPanelComponent () {
           <Typography component="p" align="left">
             Nearest Town Center
           </Typography>
-          <TextField
-            disabled
-            id="nearest-center-disabled"
-            label="Nearest Town Center"
-            className={classes.textField}
-          />
+          <Typography>
+              {props.longitude}
+          </Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography component="p" align="left">
             Current City
           </Typography>
-          <TextField
-            disabled
-            id="nearest-center-disabled"
-            label="Current City"
-            className={classes.textField}
-          />
+          <Typography>
+              {props.longitude}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
         <Typography component="p" align="left">
             Distance to the Earth Center
           </Typography>
-          <TextField
-            disabled
-            id="nearest-center-disabled"
-            label="Earth Center"
-            className={classes.textField}
-          />
+          <Typography>
+              {props.longitude}
+          </Typography>
         </Grid>
       </Grid>
     </Paper>

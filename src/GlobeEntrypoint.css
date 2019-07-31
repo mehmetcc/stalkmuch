@@ -9,6 +9,17 @@
 
 } 
 
+#SearchMobileHeader { 
+  position: absolute; 
+  left: 70px; 
+  top: 260px; 
+  width: 240px;
+  font-size: 24px; 
+  text-align: center; 
+  border-radius: 25px;
+
+} 
+
 #InformationPanelHeader {
   position: absolute;
   left: 1020px; 
