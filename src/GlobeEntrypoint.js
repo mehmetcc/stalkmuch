@@ -18,12 +18,41 @@ class GlobeEntrypoint extends React.Component {
     focus: undefined,
     longitude: 0,
     latitude: 0,
-    isBrowserSupportingGeolocation: undefined,
+    focus2: {
+      longitude: '',
+      latitude: '',
+    },
+    city: '',
   };
+
+  getLocation () {
+    navigator.geolocation.getCurrentPosition (position => {
+      console.log (position);
+      this.setState ({
+        focus: [position.coords.latitude, position.coords.longitude],
+      });
+      this.getCityName ();
+    });
+  }
+
+  getCityName () {
+    fetch (
+      'http://api.geonames.org/findNearbyPlaceNameJSON?lat=' +
+        this.state.focus[0] +
+        '&lng=' +
+        this.state.focus[1] +
+        '&username=erenayture'
+    )
+      .then (response => response.json ())
+      .then (data => this.setState ({city: data.geonames[0]['adminName1']}))
+      .then (() => console.log (this.state.city));
+  }
 
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
   callBackFromSearchComponent = searchData => {
     this.setState ({focus: searchData});
+    this.getLocation ();
+    console.log ('Callback debug: ' + this.state.city);
     this.makeApiCall (searchData[0], searchData[1]);
   };
   /** 4. bitti */
@@ -43,10 +72,7 @@ class GlobeEntrypoint extends React.Component {
         <div className="GlobeEntrypoint">
           {/**6. information panel */}
           <div id="InformationPanelMobileHeader">
-            <InformationPanelComponent
-              longitude={this.state.longitude}
-              latitude={this.state.latitude}
-            />
+            <InformationPanelComponent city={this.state.city} />
           </div>
           {/** 6. bitti */}
           {/** 3. */}
@@ -80,31 +106,7 @@ class GlobeEntrypoint extends React.Component {
               variant="extended"
               aria-label="Delete"
               className={styles.fab}
-              onClick={() => {
-                /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
-                const location =
-                  window.navigator && window.navigator.geolocation;
-
-                if (location) {
-                  location.getCurrentPosition (position => {
-                    this.setState ({
-                      focus: [
-                        position.coords.latitude,
-                        position.coords.longitude,
-                      ],
-                      longitude: position.coords.longitude,
-                      latitude: position.coords.latitude
-                    });
-
-                    this.makeApiCall (
-                      position.coords.longitude,
-                      position.coords.latitude
-                    );
-                  });
-                }
-              }
-              /** 5 bitti */
-              }
+              onClick={this.getLocation.bind (this)}
             >
               <NavigationIcon className={styles.extendedIcon} />
               Find My Location!
@@ -132,10 +134,7 @@ class GlobeEntrypoint extends React.Component {
         <div className="GlobeEntrypoint">
           {/**6. information panel */}
           <div id="InformationPanelHeader">
-            <InformationPanelComponent
-              longitude={this.state.longitude}
-              latitude={this.state.latitude}
-            />
+            <InformationPanelComponent city={this.state.city} />
           </div>
           {/** 6. bitti */}
           {/** 3. */}
@@ -169,31 +168,7 @@ class GlobeEntrypoint extends React.Component {
               variant="extended"
               aria-label="Delete"
               className={styles.fab}
-              onClick={() => {
-                /** 5. Geolocation alan ve Find My Location'a fonksiyonalite katan fonksiyon */
-                const location =
-                  window.navigator && window.navigator.geolocation;
-
-                if (location) {
-                  location.getCurrentPosition (position => {
-                    this.setState ({
-                      focus: [
-                        position.coords.latitude,
-                        position.coords.longitude,
-                      ],
-                      longitude: position.coords.longitude,
-                      latitude: position.coords.latitude
-                    });
-
-                    this.makeApiCall (
-                      position.coords.longitude,
-                      position.coords.latitude
-                    );
-                  });
-                }
-              }
-              /** 5 bitti */
-              }
+              onClick={this.getLocation.bind (this)}
             >
               <NavigationIcon className={styles.extendedIcon} />
               Find My Location!
