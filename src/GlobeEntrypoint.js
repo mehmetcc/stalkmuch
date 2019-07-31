@@ -12,6 +12,7 @@ import './GlobeEntrypoint.css';
 import SearchComponent from './components/SearchComponent';
 import InformationPanelComponent from './components/InformationPanelComponent';
 import {Tabs, Tab} from '@material-ui/core';
+import DummyComponent from './components/DummyComponent';
 
 class GlobeEntrypoint extends React.Component {
   state = {
@@ -23,6 +24,8 @@ class GlobeEntrypoint extends React.Component {
       latitude: '',
     },
     city: '',
+    altitude: undefined,
+    dummy: false,
   };
 
   getLocation () {
@@ -44,8 +47,21 @@ class GlobeEntrypoint extends React.Component {
         '&username=erenayture'
     )
       .then (response => response.json ())
-      .then (data => this.setState ({city: data.geonames[0]['adminName1']}))
+      .then (data => this.setState ({city: data.geonames[0]['adminName1'], dummy: !this.state.dummy}))
       .then (() => console.log (this.state.city));
+
+      fetch (
+        'http://api.geonames.org/astergdem?lat=' +
+          this.state.focus[0] +
+          '&lng=' +
+          this.state.focus[1] +
+          '&username=erenayture'
+      )
+        .then (response => response.json ())
+        .then (data => this.setState ({altitude: data, dummy: !this.state.dummy}))
+        .then (() => console.log (this.state.city));
+
+        console.log(this.state.altitude);
   }
 
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
@@ -70,9 +86,12 @@ class GlobeEntrypoint extends React.Component {
     if (isMobile) {
       return (
         <div className="GlobeEntrypoint">
+          <div>
+            <DummyComponent dummy={this.state.dummy} />
+          </div>
           {/**6. information panel */}
           <div id="InformationPanelMobileHeader">
-            <InformationPanelComponent city={this.state.city} />
+            <InformationPanelComponent city={this.state.city} altitude={this.state.altitude}/>
           </div>
           {/** 6. bitti */}
           {/** 3. */}
@@ -132,9 +151,12 @@ class GlobeEntrypoint extends React.Component {
     } else {
       return (
         <div className="GlobeEntrypoint">
+          <div>
+            <DummyComponent dummy={this.state.dummy} />
+          </div>
           {/**6. information panel */}
           <div id="InformationPanelHeader">
-            <InformationPanelComponent city={this.state.city} />
+            <InformationPanelComponent city={this.state.city} altitude={this.state.altitude} />
           </div>
           {/** 6. bitti */}
           {/** 3. */}

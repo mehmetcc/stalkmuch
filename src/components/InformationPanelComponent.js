@@ -20,7 +20,7 @@ const useStyles = makeStyles (theme => ({
 
 export default function InformationPanelComponent (props) {
   const classes = useStyles ();
-  const { city } = props;
+  const { city, altitude } = props;
 
   return (
     <Paper className={classes.root}>
@@ -43,10 +43,10 @@ export default function InformationPanelComponent (props) {
         </Grid>
         <Grid item xs={12}>
         <Typography component="p" align="left">
-            Distance to the Earth Center
+            Distance to the Earth Center (m)
           </Typography>
           <Typography>
-              {props.city}
+              {props.altitude}
           </Typography>
         </Grid>
       </Grid>
