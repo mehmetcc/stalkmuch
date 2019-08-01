@@ -1,5 +1,5 @@
 {
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://mehmetcc.github.io/stalkmuch",
   "name": "stalkmuch",
   "version": "0.1.0",
   "private": true,
@@ -39,6 +39,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.1.0"
+    "gh-pages": "^2.0.1"
   }
 }
