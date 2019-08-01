@@ -67,16 +67,8 @@ class GlobeEntrypoint extends React.Component {
     this.setState ({focus: searchData});
     this.getLocation ();
     console.log ('Callback debug: ' + this.state.city);
-    this.makeApiCall (searchData[0], searchData[1]);
   };
   /** 4. bitti */
-
-  makeApiCall (longitude, latitude) {
-    var host = 'localhost';
-    var port = '8080';
-
-    var link = host + ':' + port + '/location/' + longitude + '/' + latitude;
-  }
 
   render () {
     var isMobile = window.innerWidth <= 500;
