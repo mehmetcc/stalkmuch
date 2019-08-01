@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/stalkmuch/static/css/main.a3500a2f.chunk.css",
+    "main.js": "/stalkmuch/static/js/main.e9e736ec.chunk.js",
+    "main.js.map": "/stalkmuch/static/js/main.e9e736ec.chunk.js.map",
+    "runtime~main.js": "/stalkmuch/static/js/runtime~main.23da775b.js",
+    "runtime~main.js.map": "/stalkmuch/static/js/runtime~main.23da775b.js.map",
+    "static/css/2.0f465f43.chunk.css": "/stalkmuch/static/css/2.0f465f43.chunk.css",
+    "static/js/2.aa533cb6.chunk.js": "/stalkmuch/static/js/2.aa533cb6.chunk.js",
+    "static/js/2.aa533cb6.chunk.js.map": "/stalkmuch/static/js/2.aa533cb6.chunk.js.map",
+    "index.html": "/stalkmuch/index.html",
+    "precache-manifest.d09df0b554903a3a2c8accd9e4e7afc0.js": "/stalkmuch/precache-manifest.d09df0b554903a3a2c8accd9e4e7afc0.js",
+    "service-worker.js": "/stalkmuch/service-worker.js",
+    "static/css/2.0f465f43.chunk.css.map": "/stalkmuch/static/css/2.0f465f43.chunk.css.map",
+    "static/css/main.a3500a2f.chunk.css.map": "/stalkmuch/static/css/main.a3500a2f.chunk.css.map",
+    "static/media/index.css": "/stalkmuch/static/media/roboto-latin-900italic.ebf6d164.woff2"
+  }
+}
