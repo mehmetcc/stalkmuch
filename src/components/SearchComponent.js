@@ -34,21 +34,22 @@ const useStyles = makeStyles (theme => ({
 export default function SearchComponent (props) {
   const classes = useStyles ();
 
-  const [values, setValues] = React.useState ({
-    longitude: 39.9334,
-    latitude: 32.8597,
-    focus: undefined,
-  });
+  const [longitude, setLongitude] = React.useState (39.9334);
+  const [latitude, setLatitude] = React.useState (32.8597);
+  const [focus, setFocus] = React.useState (undefined);
 
-  const handleChange = name => event => {
-    setValues ({...values, [name]: event.target.value});
+  const handleLongitudeChange = event => {
+    setLongitude (event.target.value);
+    console.log ('Debug - Longitude: ' + longitude);
+  };
 
-    console.log ('Debug - Longitude: ' + values.longitude);
-    console.log ('Debug - Latitude: ' + values.latitude);
+  const handleLatitudeChange = event => {
+    setLatitude (event.target.value);
+    console.log ('Debug - Latitude: ' + latitude);
   };
 
   const sendData = () => {
-    props.parentCallback (values.focus);
+    props.parentCallback (focus);
   };
 
   return (
@@ -66,7 +67,7 @@ export default function SearchComponent (props) {
           className={classes.margin}
           defaultValue="39.9334"
           variant="filled"
-          onChange={handleChange ('longitude')}
+          onChange={handleLongitudeChange}
         />
         <br />
         <RedditTextField
@@ -74,7 +75,7 @@ export default function SearchComponent (props) {
           label="Latitude"
           defaultValue="32.8597"
           className={classes.margin}
-          onChange={handleChange ('latitude')}
+          onChange={handleLatitudeChange}
           variant="filled"
         />
         <br />
@@ -84,11 +85,9 @@ export default function SearchComponent (props) {
           color="primary"
           className={classes.button}
           onClick={() => {
-            values.focus = [values.longitude, values.latitude];
+            setFocus ([longitude, latitude]);
 
-            console.log (
-              'Debug - Focus after button is clicked: ' + values.focus
-            );
+            console.log ('Debug - Focus after button is clicked: ' + focus);
 
             sendData ();
           }}

@@ -11,8 +11,6 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import './GlobeEntrypoint.css';
 import SearchComponent from './components/SearchComponent';
 import InformationPanelComponent from './components/InformationPanelComponent';
-import {Tabs, Tab} from '@material-ui/core';
-import DummyComponent from './components/DummyComponent';
 
 class GlobeEntrypoint extends React.Component {
   state = {
@@ -86,9 +84,6 @@ class GlobeEntrypoint extends React.Component {
     if (isMobile) {
       return (
         <div className="GlobeEntrypoint">
-          <div>
-            <DummyComponent dummy={this.state.dummy} />
-          </div>
           {/**6. information panel */}
           <div id="InformationPanelMobileHeader">
             <InformationPanelComponent city={this.state.city} altitude={this.state.altitude}/>
@@ -151,9 +146,6 @@ class GlobeEntrypoint extends React.Component {
     } else {
       return (
         <div className="GlobeEntrypoint">
-          <div>
-            <DummyComponent dummy={this.state.dummy} />
-          </div>
           {/**6. information panel */}
           <div id="InformationPanelHeader">
             <InformationPanelComponent city={this.state.city} altitude={this.state.altitude} />
