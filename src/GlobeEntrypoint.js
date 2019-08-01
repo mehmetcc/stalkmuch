@@ -27,43 +27,41 @@ class GlobeEntrypoint extends React.Component {
     currentPosition: undefined,
   };
 
-  // allah belasını versin bu projenin de
-  // sddasadsads gerçekten kanser hoca ya focusu setleyince nasıl focusluyor ki acaba
-  // abi kim geolocation api yazın der amq ya lim
-  // CMD+F ReactGlobe yazsana dsadsadas
   componentDidMount = () => {
     const options = {
       enableHighAccuracy: false,
-      timeout: Infinity, 
-      maximumAge: Infinity, 
+      timeout: Infinity,
+      maximumAge: Infinity,
 
-      // abi still valid bir kaygım var
-      // bilgileri güncellemiyo aq bu nasıl iş bilmiyorum ama
-      // bazen çalışıyo mesela az önce çalıştı
-      // şimdi çalışmıyo aq?
-      // hani altitude la city propluyom abi bunu oradan oraya almak ne 
-      // kadar zor olabilir
     };
-    const error = (err) => console.error(err);
+    const error = err => console.error (err);
 
-    navigator.geolocation.getCurrentPosition (position => {
-      this.setState ({ currentPosition: [position.coords.latitude, position.coords.longitude] });
-    }, error, options);
+    navigator.geolocation.getCurrentPosition (
+      position => {
+        this.setState ({
+          currentPosition: [
+            position.coords.latitude,
+            position.coords.longitude,
+          ],
+        });
+      },
+      error,
+      options
+    );
   };
 
-  // kanka currentPosition setState'de ama state'de position???
-  
+
   getLocation = () => {
     if (!this.state.currentPosition) {
-      console.log('Could not get current position') // bu yazı geliyom u sana????? yok
-      setTimeout(this.getLocation, 1000);
+      console.log ('Could not get current position'); 
+      setTimeout (this.getLocation, 1000);
       return;
-      // ya abi bazen çalışması acaba api'nin bazı koordileri almaması sebebiyle mi acep
-      // ama o zaman hata vermesi lazım?
-      // niye cord diyo amq
     }
-    this.setState(state => ({ focus: [...state.currentPosition] }), this.getCityName)
-  }
+    this.setState (
+      state => ({focus: [...state.currentPosition]}),
+      this.getCityName
+    );
+  };
 
   getCityName = () => {
     const [lat, lng] = this.state.focus;
@@ -75,14 +73,14 @@ class GlobeEntrypoint extends React.Component {
     );
 
     Promise.all ([fetchPlaceName, fetchAltitude])
-      .then (response => Promise.all (response.map (r => r.json ()))) // iğrenç lel
+      .then (response => Promise.all (response.map (r => r.json ())))
       .then (([placeNameData, altitude]) => {
         if (!altitude) {
-          throw new Error ('sıçtık');
+          throw new Error ('Some error happened :)');
         }
-        console.log({ placeNameData, altitude }) // kanki buradaki log geliyo diyon ama api cevap vermiş ozmn mk
+        console.log ({placeNameData, altitude}); 
         const city = placeNameData.geonames[0]['adminName1'];
-        this.setState ({city, altitude /*, dummy: !this.state.dummy*/}); 
+        this.setState ({city, altitude});
       })
       .catch (error => {
         this.setState ({apiError: true});
@@ -94,7 +92,7 @@ class GlobeEntrypoint extends React.Component {
   callBackFromSearchComponent = searchData => {
     // tmm bura bozuk dimi
     /// aaa duur dur bir dk nop still same yukarı bak bi
-    this.setState ({ focus: [...searchData] }, this.getCityName);
+    this.setState ({focus: [...searchData]}, this.getCityName);
     console.log ('Callback debug: ' + this.state.city); // bi dk searchData ile mi yapıon? aynen oradan gelip oraya gidiyo .dd
   };
   /** 4. bitti */
