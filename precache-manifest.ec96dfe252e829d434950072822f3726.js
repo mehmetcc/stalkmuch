@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a220729bfa54e6951a23ce0989e55388",
+    "revision": "aca437b6fa3b316ce9efa120b16fe3e0",
     "url": "/stalkmuch/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/stalkmuch/static/css/2.0f465f43.chunk.css"
   },
   {
-    "revision": "98194ee3fc9390139d18",
+    "revision": "f572249d70867d88b6e5",
     "url": "/stalkmuch/static/css/main.a3500a2f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/stalkmuch/static/js/2.f74ef720.chunk.js"
   },
   {
-    "revision": "98194ee3fc9390139d18",
-    "url": "/stalkmuch/static/js/main.e48f183a.chunk.js"
+    "revision": "f572249d70867d88b6e5",
+    "url": "/stalkmuch/static/js/main.b5ac9be9.chunk.js"
   },
   {
     "revision": "7cdd9fd0c215ec5570fd",
