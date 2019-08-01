@@ -23,8 +23,8 @@ class App extends React.Component {
       /** Arkadaşlar bakın routing ile oynamayın */
       <Router>
       <Switch>
-            <Route exact path='${process.env.PUBLIC_URL}/' component={Eula} />
-            <Route path='${process.env.PUBLIC_URL}/globe' component={GlobeEntrypoint} />
+            <Route path={'${process.env.PUBLIC_URL}/'} component={Eula} />
+            <Route path={'${process.env.PUBLIC_URL}/'} component={GlobeEntrypoint} />
           </Switch>
       </Router>
       /** Routing burada bitiyo */
