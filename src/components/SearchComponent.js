@@ -49,8 +49,11 @@ export default function SearchComponent (props) {
   };
 
   const sendData = () => {
-    props.parentCallback (focus);
+    focus && props.parentCallback (focus);
   };
+
+   React.useEffect(sendData, [focus]);
+   // lmao
 
   return (
     <div>
@@ -85,11 +88,13 @@ export default function SearchComponent (props) {
           color="primary"
           className={classes.button}
           onClick={() => {
+            // kanki şimdi aynı problem burada var
             setFocus ([longitude, latitude]);
 
             console.log ('Debug - Focus after button is clicked: ' + focus);
-
-            sendData ();
+            // ya dün bu çalışmadı
+            // attığın şeyi denedim
+            // terminali görüyosun dimi :( // yeni baktım bi dk basit bu
           }}
         >
           Submit

@@ -24,49 +24,78 @@ class GlobeEntrypoint extends React.Component {
     city: '',
     altitude: undefined,
     dummy: false,
+    currentPosition: undefined,
   };
 
-  getLocation () {
+  // allah belasını versin bu projenin de
+  // sddasadsads gerçekten kanser hoca ya focusu setleyince nasıl focusluyor ki acaba
+  // abi kim geolocation api yazın der amq ya lim
+  // CMD+F ReactGlobe yazsana dsadsadas
+  componentDidMount = () => {
+    const options = {
+      enableHighAccuracy: false,
+      timeout: Infinity, 
+      maximumAge: Infinity, 
+
+      // abi still valid bir kaygım var
+      // bilgileri güncellemiyo aq bu nasıl iş bilmiyorum ama
+      // bazen çalışıyo mesela az önce çalıştı
+      // şimdi çalışmıyo aq?
+      // hani altitude la city propluyom abi bunu oradan oraya almak ne 
+      // kadar zor olabilir
+    };
+    const error = (err) => console.error(err);
+
     navigator.geolocation.getCurrentPosition (position => {
-      console.log (position);
-      this.setState ({
-        focus: [position.coords.latitude, position.coords.longitude],
+      this.setState ({ currentPosition: [position.coords.latitude, position.coords.longitude] });
+    }, error, options);
+  };
+
+  // kanka currentPosition setState'de ama state'de position???
+  
+  getLocation = () => {
+    if (!this.state.currentPosition) {
+      console.log('Could not get current position') // bu yazı geliyom u sana????? yok
+      setTimeout(this.getLocation, 1000);
+      return;
+      // ya abi bazen çalışması acaba api'nin bazı koordileri almaması sebebiyle mi acep
+      // ama o zaman hata vermesi lazım?
+      // niye cord diyo amq
+    }
+    this.setState(state => ({ focus: [...state.currentPosition] }), this.getCityName)
+  }
+
+  getCityName = () => {
+    const [lat, lng] = this.state.focus;
+    const fetchPlaceName = fetch (
+      `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=erenayture`
+    );
+    const fetchAltitude = fetch (
+      `http://api.geonames.org/astergdem?lat=${lat}&lng=${lng}&username=erenayture`
+    );
+
+    Promise.all ([fetchPlaceName, fetchAltitude])
+      .then (response => Promise.all (response.map (r => r.json ()))) // iğrenç lel
+      .then (([placeNameData, altitude]) => {
+        if (!altitude) {
+          throw new Error ('sıçtık');
+        }
+        console.log({ placeNameData, altitude }) // kanki buradaki log geliyo diyon ama api cevap vermiş ozmn mk
+        const city = placeNameData.geonames[0]['adminName1'];
+        this.setState ({city, altitude /*, dummy: !this.state.dummy*/}); 
+      })
+      .catch (error => {
+        this.setState ({apiError: true});
       });
-      this.getCityName ();
-    });
-  }
-
-  getCityName () {
-    fetch (
-      'http://api.geonames.org/findNearbyPlaceNameJSON?lat=' +
-        this.state.focus[0] +
-        '&lng=' +
-        this.state.focus[1] +
-        '&username=erenayture'
-    )
-      .then (response => response.json ())
-      .then (data => this.setState ({city: data.geonames[0]['adminName1'], dummy: !this.state.dummy}))
-      .then (() => console.log (this.state.city));
-
-      fetch (
-        'http://api.geonames.org/astergdem?lat=' +
-          this.state.focus[0] +
-          '&lng=' +
-          this.state.focus[1] +
-          '&username=erenayture'
-      )
-        .then (response => response.json ())
-        .then (data => this.setState ({altitude: data, dummy: !this.state.dummy}))
-        .then (() => console.log (this.state.city));
-
-        console.log(this.state.altitude);
-  }
+  };
 
   /** 4. - GlobeEntypoint ve SearchComponent Entegrasyonu */
+  // cıks :(
   callBackFromSearchComponent = searchData => {
-    this.setState ({focus: searchData});
-    this.getLocation ();
-    console.log ('Callback debug: ' + this.state.city);
+    // tmm bura bozuk dimi
+    /// aaa duur dur bir dk nop still same yukarı bak bi
+    this.setState ({ focus: [...searchData] }, this.getCityName);
+    console.log ('Callback debug: ' + this.state.city); // bi dk searchData ile mi yapıon? aynen oradan gelip oraya gidiyo .dd
   };
   /** 4. bitti */
 
@@ -78,7 +107,11 @@ class GlobeEntrypoint extends React.Component {
         <div className="GlobeEntrypoint">
           {/**6. information panel */}
           <div id="InformationPanelMobileHeader">
-            <InformationPanelComponent city={this.state.city} altitude={this.state.altitude}/>
+            <InformationPanelComponent
+              city={this.state.city}
+              altitude={this.state.altitude}
+            />
+            {/* bu üstteki zımbırtının update olması gerek otomatik amirite? yeee*/}
           </div>
           {/** 6. bitti */}
           {/** 3. */}
@@ -106,13 +139,12 @@ class GlobeEntrypoint extends React.Component {
             }}
             align="center"
           >
-
             <Fab
               color="primary"
               variant="extended"
               aria-label="Delete"
               className={styles.fab}
-              onClick={this.getLocation.bind (this)}
+              onClick={this.getLocation}
             >
               <NavigationIcon className={styles.extendedIcon} />
               Find My Location!
@@ -140,7 +172,10 @@ class GlobeEntrypoint extends React.Component {
         <div className="GlobeEntrypoint">
           {/**6. information panel */}
           <div id="InformationPanelHeader">
-            <InformationPanelComponent city={this.state.city} altitude={this.state.altitude} />
+            <InformationPanelComponent
+              city={this.state.city}
+              altitude={this.state.altitude}
+            />
           </div>
           {/** 6. bitti */}
           {/** 3. */}
