@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5fe02c12407e582706871f104314274e",
+    "revision": "3ae2db5696cb8e446d020c6da7e301dd",
     "url": "/stalkmuch/index.html"
   },
   {
-    "revision": "04e729bb9fe31b947627",
+    "revision": "028ba3ff3e61d8a9e3d6",
     "url": "/stalkmuch/static/css/2.0f465f43.chunk.css"
   },
   {
-    "revision": "92fd2daf6f9b87b0f762",
+    "revision": "66ed0755d1b88d898be0",
     "url": "/stalkmuch/static/css/main.a3500a2f.chunk.css"
   },
   {
-    "revision": "04e729bb9fe31b947627",
-    "url": "/stalkmuch/static/js/2.aa533cb6.chunk.js"
+    "revision": "028ba3ff3e61d8a9e3d6",
+    "url": "/stalkmuch/static/js/2.a330dad1.chunk.js"
   },
   {
-    "revision": "92fd2daf6f9b87b0f762",
-    "url": "/stalkmuch/static/js/main.4be1f436.chunk.js"
+    "revision": "66ed0755d1b88d898be0",
+    "url": "/stalkmuch/static/js/main.4a169231.chunk.js"
   },
   {
     "revision": "7cdd9fd0c215ec5570fd",

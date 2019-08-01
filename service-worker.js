@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/stalkmuch/precache-manifest.544c57cdf9e8ec69d8e7b7b71fe660e3.js"
+  "/stalkmuch/precache-manifest.bf9f855f4f08c50ff883c7106d472f6b.js"
 );
 
 self.addEventListener('message', (event) => {
