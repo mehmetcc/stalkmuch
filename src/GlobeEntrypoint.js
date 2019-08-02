@@ -34,41 +34,15 @@ class GlobeEntrypoint extends React.Component {
     currentPosition: undefined,
   };
 
-  componentDidMount = () => {
-    const options = {
-      enableHighAccuracy: false,
-      timeout: Infinity,
-      maximumAge: Infinity,
-
-    };
-    const error = err => console.error (err);
-
-    navigator.geolocation.getCurrentPosition (
-      position => {
-        this.setState ({
-          currentPosition: [
-            position.coords.latitude,
-            position.coords.longitude,
-          ],
-        });
-      },
-      error,
-      options
-    );
-  };
-
-
-  getLocation = () => {
-    if (!this.state.currentPosition) {
-      console.log ('Could not get current position'); 
-      setTimeout (this.getLocation, 1000);
-      return;
-    }
-    this.setState (
-      state => ({focus: [...state.currentPosition]}),
-      this.getCityName
-    );
-  };
+  getLocation () {
+    navigator.geolocation.getCurrentPosition (position => {
+      console.log (position);
+      this.setState ({
+        focus: [position.coords.latitude, position.coords.longitude],
+      });
+      this.getCityName ();
+    });
+  }
 
   getCityName = () => {
     const [lat, lng] = this.state.focus;
@@ -85,7 +59,7 @@ class GlobeEntrypoint extends React.Component {
         if (!altitude) {
           throw new Error ('Some error happened :)');
         }
-        console.log ({placeNameData, altitude}); 
+        console.log ({placeNameData, altitude});
         const city = placeNameData.geonames[0]['adminName1'];
         this.setState ({city, altitude});
       })
