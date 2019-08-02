@@ -1,3 +1,10 @@
+/**
+ * DAVID DAVENPORT'UN ASKERLERİYİZ
+ * 
+ * @author: Mehmet Can Altuntaş
+ *          github.com/mehmetcc
+ */
+
 /** All react related imports */
 import React from 'react';
 /** All material-ui related imports */

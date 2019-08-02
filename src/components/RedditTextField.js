@@ -1,3 +1,10 @@
+/**
+ * DAVID DAVENPORT'UN ASKERLERİYİZ
+ * 
+ * @author: Mehmet Can Altuntaş
+ *          github.com/mehmetcc
+ */
+
 import React from 'react';
 import {
   fade,

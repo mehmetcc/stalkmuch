@@ -1,6 +1,12 @@
+/**
+ * DAVID DAVENPORT'UN ASKERLERİYİZ
+ * 
+ * @author: Mehmet Can Altuntaş
+ *          github.com/mehmetcc
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createHistory from "history/createBrowserHistory";
 import './index.css';
 import 'typeface-roboto';
 
