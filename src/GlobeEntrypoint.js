@@ -47,10 +47,10 @@ class GlobeEntrypoint extends React.Component {
   getCityName = () => {
     const [lat, lng] = this.state.focus;
     const fetchPlaceName = fetch (
-      `https://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=erenayture`
+      `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lng}&username=erenayture`
     );
     const fetchAltitude = fetch (
-      `https://api.geonames.org/astergdem?lat=${lat}&lng=${lng}&username=erenayture`
+      `http://api.geonames.org/astergdem?lat=${lat}&lng=${lng}&username=erenayture`
     );
 
     Promise.all ([fetchPlaceName, fetchAltitude])
